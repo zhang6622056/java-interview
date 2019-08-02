@@ -50,7 +50,87 @@ Java基础面试题
 
 
 
-### 3.简述Object的几个基本方法
+### 3.简述Java的clone方法
+
+- clone方法
+所有的clone方法都指的是浅拷贝，所谓浅拷贝指的是user.clone只是user的一个备份。但是如果user内有其他引用类型属性的时候，这些属性与clone完成的对象是共享的。
+也就是原对象的设置方法将会影响拷贝完成后备份的属性值
+
+- 但是这里需要注意的是String与基本类型的包装类，它们原则上都是不可变的。也就是copyOnWrite的一种实现方式。所以这种类型的变量不会有什么影响
+
+可参考案例:
+
+
+    public class Question3 extends BaseQuestion3 implements Cloneable{
+    
+        private String username;
+        private Integer password;
+        private Computer computer;
+        //此处省略setter getter
+    
+        public static void main(String[] args) throws CloneNotSupportedException {
+            Question3 question3 = new Question3();
+            question3.setComputer(new Computer());
+            question3.setUsername("nero");
+            Question3 questionAno = (Question3) question3.clone();
+            questionAno.setUsername("dante");
+    
+            System.out.println(questionAno.getUsername());
+            System.out.println(question3.getUsername());
+    
+            System.out.println(questionAno == question3);
+            System.out.println(questionAno.getComputer() == question3.getComputer());
+            System.out.println(questionAno.getUsername() == question3.getUsername());
+            System.out.println(questionAno.getPassword() == question3.getPassword());
+        }
+    }
+
+
+- 相信你已经发现，我们希望一个全新的类，省略set赋值的过程，这我们称之为深拷贝，那么如何进行深拷贝呢?
+一个是Java序列化，另外一个则推荐使用BeanCopy来实现。相关实现有3,其中性能较高的是cglib的beancopy，原因可以自行搜索动态代理与反射原理
+
+    - BeanCopy From Apache Util
+    - BeanCopy from spring
+    - BeanCopy from cglib
+
+
+### 4.简述Java Object的equals方法
+
+- code from jdk8
+
+        public boolean equals(Object obj) {
+            return (this == obj);
+        }
+        
+   意指内存指向是否相同，不再过多追述
+
+
+
+### 5.简述Java Object的hashcode方法
+hashcode方法可以说是java为了散列表所做的一项技术，当然基本上所有的语言都会支撑以散列算法来实现o(1)的存取。
+最简单的散列技术无非就是取余，它是空间换取时间的一种算法。
+
+- 入门推荐：https://blog.csdn.net/zhang6622056/article/details/79380812
+
+- 进阶推荐：
+    
+    - https://www.cnblogs.com/skywang12345/p/3311899.html
+    - https://www.cnblogs.com/skywang12345/p/3311909.html
+    - https://www.cnblogs.com/skywang12345/p/3311915.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 4.简述Java的4种引用类型
 ### 5.结合源码说明String、StringBuffer与StringBuilder的区别
 ### 6.结合字节码说明try catch finally的执行顺序

@@ -58,6 +58,8 @@ Java基础面试题
 
 - 但是这里需要注意的是String与基本类型的包装类，它们原则上都是不可变的。也就是copyOnWrite的一种实现方式。所以这种类型的变量不会有什么影响
 
+- 重写clone方法，必须显示调用super.clone
+
 可参考案例:
 
 
@@ -121,6 +123,25 @@ hashcode方法可以说是java为了散列表所做的一项技术，当然基�
 
 
 
+### 6.简述Java Object的finalize方法
+
+
+finalize方法是Java gc过程中会调用的一个方法(前提是被回收对象的程序中重写了该方法)。
+该方法严格意义上不建议在程序中显示的被调用，但是，如果显示调用了该方法，该方法也就是一个对象方法而已，没有什么特殊的含义
+一般用于gc前的资源释放，比如mysql驱动中的如下代码，当对象被回收，我们进行链接的释放
+    
+    
+	protected void finalize() throws Throwable {
+		cleanup(null);
+		
+		super.finalize();
+	}
+
+
+- 进阶参考
+    - https://bijian1013.iteye.com/blog/2288223
+    - https://zhang-xzhi-xjtu.iteye.com/blog/484934
+    
 
 
 

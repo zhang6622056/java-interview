@@ -141,22 +141,25 @@ finalize方法是Java gc过程中会调用的一个方法(前提是被回收对�
 - 进阶参考
     - https://bijian1013.iteye.com/blog/2288223
     - https://zhang-xzhi-xjtu.iteye.com/blog/484934
+    - https://openhome.cc/Gossip/JavaEssence/Finalize.html
     
 
-
-
-
-
-
-
-
+### 7.简述反射，为什么反射性能差?
 
 
 ### 4.简述Java的4种引用类型
+
+
+
+
+
+
+
+
 ### 5.结合源码说明String、StringBuffer与StringBuilder的区别
 ### 6.结合字节码说明try catch finally的执行顺序
 ### 7.简述Java的异常处理? Exception和Error
-### 8.简述反射，为什么反射性能差?
+
 
 
 

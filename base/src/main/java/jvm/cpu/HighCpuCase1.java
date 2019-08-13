@@ -1,4 +1,4 @@
-package jvm;
+package jvm.cpu;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -12,6 +12,9 @@ public class HighCpuCase1 {
 
 
     public static void main(String[] args) {
+
+
+
         for (int i = 0 ; i < 30 ; i++){
             Task a = new Task();
             executor.execute(a);
